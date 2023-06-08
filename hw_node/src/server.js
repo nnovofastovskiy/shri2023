@@ -1,28 +1,27 @@
 const express = require('express');
-const http = require('node:http')
-const https = require('node:https')
+const { fetcher } = require('../fetcher.js');
 
 const app = express();
 const port = 3000;
 
-function fetch(url) {
-    return new Promise((resolve, reject) => {
-        let req = https.get(url, (res) => {
+const regLink = "<a.*?href=[\"\"'](?<url>.*?)[\"\"'].*?>(?<name>.*?)<\/a>";
 
-        })
-        req.on('error', err => reject('failed on the request' + err.message));
-    })
-}
-
-app.use(express.json());       // to support JSON-encoded bodies
-app.post('/parse', (req, res) => {
+app.use(express.json());
+app.post('/parse', async (req, res) => {
     console.log(req.body.data);
-    const rootUrl = req.body.data.domainName
-
-    https.get(rootUrl, (res) => {
-        console.log(res.headers);
-    })
-    res.send('OK')
+    const rootUrl = req.body.data.domainName;
+    let stack = [rootUrl];
+    let result = {}
+    while (stack.length > 0) {
+        console.log('===================================stack: ', stack);
+        const fetcherRes = await fetcher(stack.pop());
+        console.log('fetcherRes: ', fetcherRes);
+        const text = await fetcherRes.text();
+        const parsedLinks = Array.from(text.matchAll(regLink)).map(link => link.groups.url);
+        stack.push(...parsedLinks);
+        console.log(parsedLinks);
+    }
+    res.sendStatus(200);
 })
 
 app.listen(port, (err) => {
