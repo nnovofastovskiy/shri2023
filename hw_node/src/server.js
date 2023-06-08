@@ -11,17 +11,35 @@ app.post('/parse', async (req, res) => {
     console.log(req.body.data);
     const rootUrl = req.body.data.domainName;
     let stack = [rootUrl];
-    let result = {}
+    let result = [];
     while (stack.length > 0) {
         console.log('===================================stack: ', stack);
-        const fetcherRes = await fetcher(stack.pop());
+        const currentUrl = stack.pop();
+        let fetcherRes = await fetcher(currentUrl);
         console.log('fetcherRes: ', fetcherRes);
-        const text = await fetcherRes.text();
-        const parsedLinks = Array.from(text.matchAll(regLink)).map(link => link.groups.url);
-        stack.push(...parsedLinks);
-        console.log(parsedLinks);
+        let status = fetcherRes.status;
+        if (Math.floor(status / 100) == 5) {    // retry 1 time
+            fetcherRes = await fetcher(currentUrl);
+        }
+        status = fetcherRes.status;
+        if (Math.floor(status / 100) == 2) {
+
+            const text = await fetcherRes.text();
+            const parsedLinks = Array.from(text.matchAll(regLink)).map(link => link.groups.url);
+            for (let i = parsedLinks.length - 1; i >= 0; i--) {
+                if (!result.includes(parsedLinks[i])) {
+                    stack.push(parsedLinks[i]);
+                }
+            }
+            if (!result.includes(currentUrl)) {
+                result.push(currentUrl);
+            }
+            console.log(parsedLinks);
+        }
+        // stack.push(...parsedLinks);
     }
-    res.sendStatus(200);
+    res.status(200);
+    res.send(result);
 })
 
 app.listen(port, (err) => {
