@@ -8,15 +8,12 @@ const regLink = "<a.*?href=[\"\"'](?<url>.*?)[\"\"'].*?>(?<name>.*?)<\/a>";
 
 app.use(express.json());
 app.post('/parse', async (req, res) => {
-    console.log(req.body.data);
-    const rootUrl = req.body.data.domainName;
+    const rootUrl = req.body.domainName;
     let stack = [rootUrl];
     let result = [];
     while (stack.length > 0) {
-        console.log('===================================stack: ', stack);
         const currentUrl = stack.pop();
         let fetcherRes = await fetcher(currentUrl);
-        console.log('fetcherRes: ', fetcherRes);
         let status = fetcherRes.status;
         if (Math.floor(status / 100) == 5) {    // retry 1 time
             fetcherRes = await fetcher(currentUrl);
@@ -34,9 +31,7 @@ app.post('/parse', async (req, res) => {
             if (!result.includes(currentUrl)) {
                 result.push(currentUrl);
             }
-            console.log(parsedLinks);
         }
-        // stack.push(...parsedLinks);
     }
     res.status(200);
     res.send(result);
