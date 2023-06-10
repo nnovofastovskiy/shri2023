@@ -13,10 +13,11 @@ function solution(n, arr) {
     let minIndex = n - 2;
     let max = arr[maxIndex];
     let diff = 0;
+    // let map = {};
     for (let i = minIndex; i >= 0; i--) {
         console.log('max = ', max);
         console.log('arr[i] = ', arr[i]);
-        if (arr[i] >= max) {
+        if (arr[i] > max && i > 0) {
             max = arr[i];
             maxIndex = i;
         }
@@ -28,8 +29,10 @@ function solution(n, arr) {
             }
         }
     }
-    if (minIndex == maxIndex) return '0 0'
+    if (diff == 0) return '0 0';
     return `${minIndex + 1} ${maxIndex + 1}`;
 }
 
-fs.writeFileSync("output.txt", solution(n, arr).toString())
+console.log(solution(n, arr));
+
+// fs.writeFileSync("output.txt", solution(n, arr).toString())
