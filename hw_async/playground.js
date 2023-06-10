@@ -63,28 +63,36 @@
 
 // решение задачи
 async function solution({ minPrice, maxPrice, catalog }) {
+    const start = console.time();
     let result = [];
 
     let catalogStack = [catalog];
     let productStack = [];
 
     while (catalogStack.length > 0) {
-        const cat = await getAllFromCatalog(catalogStack.pop());
-        const isActive = cat[1];
-        const children = cat[0];
-        if (isActive) {
-            for (let i = children.length - 1; i >= 0; i--) {
-                const child = children[i];
-                if (child.hasOwnProperty('getChildren')) {
-                    catalogStack.push(child);
-                } else {
-                    productStack.push(child)
+        await Promise.all(catalogStack.map(cat => getAllFromCatalog(cat))).then(res => {
+            catalogStack = [];
+            res.forEach(cat => {
+                const isActive = cat[1];
+                const children = cat[0];
+                if (isActive) {
+                    for (let i = children.length - 1; i >= 0; i--) {
+                        const child = children[i];
+                        if (child.hasOwnProperty('getChildren')) {
+                            catalogStack.push(child);
+                        } else {
+                            productStack.push(child)
+                        }
+                    }
                 }
-            }
-        }
+            })
+        })
+        // const cat = await getAllFromCatalog(catalogStack.pop());
     }
 
+
     return await Promise.all(productStack.map(prod => getAllFromProduct(prod))).then(res => {
+        console.timeEnd(start);
         return res
             .filter(prod => prod[0] && (prod[2] >= minPrice && prod[2] <= maxPrice))
             .sort((p1, p2) => {
