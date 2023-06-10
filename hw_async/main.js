@@ -5,19 +5,24 @@ async function solution({ minPrice, maxPrice, catalog }) {
     let productStack = [];
 
     while (catalogStack.length > 0) {
-        const cat = await getAllFromCatalog(catalogStack.pop());
-        const isActive = cat[1];
-        const children = cat[0];
-        if (isActive) {
-            for (let i = children.length - 1; i >= 0; i--) {
-                const child = children[i];
-                if (child.hasOwnProperty('getChildren')) {
-                    catalogStack.push(child);
-                } else {
-                    productStack.push(child)
+        await Promise.all(catalogStack.map(cat => getAllFromCatalog(cat))).then(res => {
+            catalogStack = [];
+            res.forEach(cat => {
+                const isActive = cat[1];
+                const children = cat[0];
+                if (isActive) {
+                    for (let i = children.length - 1; i >= 0; i--) {
+                        const child = children[i];
+                        if (child.hasOwnProperty('getChildren')) {
+                            catalogStack.push(child);
+                        } else {
+                            productStack.push(child)
+                        }
+                    }
                 }
-            }
-        }
+            })
+        })
+        // const cat = await getAllFromCatalog(catalogStack.pop());
     }
 
     return await Promise.all(productStack.map(prod => getAllFromProduct(prod))).then(res => {
