@@ -1,11 +1,16 @@
 import { segmentNames } from './model';
-export function isElement(element) {
+import { State, States } from './view';
+export type DomOptions = {
+    className: string,
+    templateId: string
+}
+export function isElement(element: Node): element is HTMLElement {
     return element.nodeType === 1;
 }
-export function isTemplateNode(element) {
+export function isTemplateNode(element: Node): element is HTMLTemplateElement {
     return isElement(element) && element.nodeName === 'TEMPLATE';
 }
-export function imageCreator(templateId) {
+export function imageCreator(templateId: string) {
     const templateElement = document.getElementById(templateId);
     if (!templateElement)
         return null;
@@ -14,12 +19,12 @@ export function imageCreator(templateId) {
     const clone = () => templateElement.content.cloneNode(true);
     return clone;
 }
-export function checkNonNullable(value) {
+export function checkNonNullable(value: (() => Node) | null) {
     if (value === null) {
         throw new Error('value is null');
     }
 }
-export function makeDisplays(amount, parentElement, domOptions) {
+export function makeDisplays(amount: number, parentElement: HTMLDivElement, domOptions: DomOptions) {
     const displays = [...parentElement.querySelectorAll(`.${domOptions.className}`)];
     for (let i = displays.length - 1; i >= amount; i -= 1) {
         displays[i].remove();
@@ -35,7 +40,7 @@ export function makeDisplays(amount, parentElement, domOptions) {
     }
     return displays;
 }
-export function updateDisplay(segments, display) {
+export function updateDisplay(segments: State, display: Element) {
     for (const segmentName of segmentNames) {
         display.classList.remove(segmentName);
     }
@@ -43,15 +48,15 @@ export function updateDisplay(segments, display) {
         display.classList.add(segmentName);
     }
 }
-export function updateDisplayBlock(segments, parentElement, domOptions) {
+export function updateDisplayBlock(segments: States, parentElement: HTMLDivElement, domOptions: DomOptions) {
     const displays = makeDisplays(segments.length, parentElement, domOptions);
     segments.forEach((segment, i) => {
         updateDisplay(segment, displays[i]);
     });
 }
-export function initAnimation(domOptions) {
+export function initAnimation(domOptions: DomOptions) {
     const frameDelay = 200;
-    const frameBuffers = new Map();
+    const frameBuffers = new Map<HTMLDivElement, States[]>();
     function animateFrame() {
         for (const [parent, frameBuffer] of frameBuffers) {
             if (frameBuffer.length) {

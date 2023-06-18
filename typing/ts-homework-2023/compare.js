@@ -8,7 +8,7 @@ const rf = n => rfs(n).toString('utf-8');
 const rph = rv(__dirname, './raw');
 for (const oph of gs(rv(rph, '**', '*.js').replace(/\\/g, '/'))) {
   const name = oph.replace(rph, '');
-  const dl = D.diffLines(rf(oph), rf(rv(__dirname, './dist' + name)));
+  const dl = D.diffLines(rf(oph), rf(rv(__dirname, './dist/src' + name)));
   if (!dl.some(p => p.added || p.removed)) continue;
   console.log(s('1', name + '\n'));
   dl.forEach(({ added: a, removed: r, value: v, count: L }) => {

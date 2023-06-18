@@ -1,16 +1,17 @@
-import { segmentCodes } from './model';
-export function isKnownChar(char: string): char is Char {
+import { SegmentNames, segmentCodes } from './model';
+export function isKnownChar(char: string): char is SegmentNames {
     return char in segmentCodes;
 }
 
-export type ToDisplayOptions = {
+export type Options = {
     convertToUpperCase: boolean,
-    unknownChar: string
+    unknownChar?: "exception"
 }
 
-export type Char = keyof typeof segmentCodes;
+export type State = SegmentNames[];
+export type States = State[];
 
-export function charToDisplay(char: string, options?: ToDisplayOptions) {
+export function charToDisplay(char: string, options?: Options) {
     console.log(options);
     if (options?.convertToUpperCase) {
         char = char.toUpperCase();
@@ -25,6 +26,6 @@ export function charToDisplay(char: string, options?: ToDisplayOptions) {
     }
     return segmentCodes[char];
 }
-export function stringToDisplay(input: string[], options: ToDisplayOptions) {
+export function stringToDisplay(input: string, options: Options) {
     return [...input].map(c => charToDisplay(c, options));
 }

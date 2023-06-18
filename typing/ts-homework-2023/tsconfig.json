@@ -3,12 +3,4 @@
   "include": [
     "src"
   ],
-  "compilerOptions": {
-    "strict": true,
-    "noImplicitAny": true,
-    "strictFunctionTypes": true,
-    "strictPropertyInitialization": true,
-    "noImplicitThis": true,
-    "alwaysStrict": true,
-  }
 }

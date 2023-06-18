@@ -1,6 +1,6 @@
 import { clampToLength, emptyDisplays } from './utils';
-import { Char, ToDisplayOptions, stringToDisplay } from './view';
-export function marquee(input: string, displayAmount = input.length, options: ToDisplayOptions) {
+import { Options, stringToDisplay } from './view';
+export function marquee(input: string, displayAmount = input.length, options: Options) {
     const frames = [];
     for (let i = displayAmount - 1; i >= Math.min(0, displayAmount - input.length); i -= 1) {
         const leftPad = Math.max(0, i);
@@ -12,7 +12,7 @@ export function marquee(input: string, displayAmount = input.length, options: To
     }
     return frames;
 }
-export function blink(input: string[], counts = 10, options: ToDisplayOptions) {
+export function blink(input: string, counts = 10, options: Options) {
     const frames = [];
     const empty = emptyDisplays(input.length);
     const text = stringToDisplay(input, options);
@@ -21,7 +21,7 @@ export function blink(input: string[], counts = 10, options: ToDisplayOptions) {
     }
     return frames;
 }
-export function typing(input: string[], options: ToDisplayOptions) {
+export function typing(input: string, options: Options) {
     const frames = [];
     const text = stringToDisplay(input, options);
     for (let i = 0; i < input.length; i++) {

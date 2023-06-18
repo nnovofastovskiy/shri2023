@@ -1,6 +1,8 @@
 import { segmentNames } from "./model";
 import { clampToLength } from "./utils";
-export function transition(from, to, animateDisplay, animateDisplayOptions) {
+import { State, States } from "./view";
+export type AnimationOptions = { dense: boolean };
+export function transition(from: States, to: States, animateDisplay: (from: State, to: State, options?: AnimationOptions) => States, animateDisplayOptions?: AnimationOptions) {
     from = clampToLength(from, to.length);
     const displayFrames = from.map((startDisplayState, i) => {
         return animateDisplay(startDisplayState, to[i], animateDisplayOptions);
@@ -12,7 +14,7 @@ export function transition(from, to, animateDisplay, animateDisplayOptions) {
     }
     return frames;
 }
-export function segmentBySegment(from, to, options) {
+export function segmentBySegment(from: State, to: State, options?: AnimationOptions) {
     const curState = new Set(from);
     const toState = new Set(to);
     const res = [[...curState]];
@@ -35,8 +37,8 @@ const layers = [
     ["a", "b", "c", "d", "e", "f"],
     ["h", "j", "k", "m"],
     ["i", "l", "g1", "g2"],
-];
-export function layerByLayer(from, to) {
+] as const;
+export function layerByLayer(from: State, to: State) {
     const curState = new Set(from);
     const toState = new Set(to);
     const res = [[...curState]];
