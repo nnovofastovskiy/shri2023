@@ -1,5 +1,5 @@
 import { segmentNames } from './model';
-import { State, States } from './view';
+import { State, States } from './model';
 export type DomOptions = {
     className: string,
     templateId: string

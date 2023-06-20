@@ -8,9 +8,6 @@ export type Options = {
     unknownChar?: "exception"
 }
 
-export type State = SegmentNames[];
-export type States = State[];
-
 export function charToDisplay(char: string, options?: Options) {
     console.log(options);
     if (options?.convertToUpperCase) {

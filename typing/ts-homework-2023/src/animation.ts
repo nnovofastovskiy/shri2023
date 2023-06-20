@@ -1,6 +1,6 @@
 import { segmentNames } from "./model";
 import { clampToLength } from "./utils";
-import { State, States } from "./view";
+import { State, States } from "./model";
 export type AnimationOptions = { dense: boolean };
 export function transition(from: States, to: States, animateDisplay: (from: State, to: State, options?: AnimationOptions) => States, animateDisplayOptions?: AnimationOptions) {
     from = clampToLength(from, to.length);

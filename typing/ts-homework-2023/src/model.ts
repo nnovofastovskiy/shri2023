@@ -1,6 +1,8 @@
 export const segmentNames = ["a", "b", "c", "d", "e", "f", "g1", "g2", "h", "i", "j", "k", "l", "m"] as const;
 
 export type SegmentNames = (typeof segmentNames)[number];
+export type State = SegmentNames[];
+export type States = State[];
 
 export const segmentCodes: { [key: string]: SegmentNames[] } = {
     "0": ["a", "b", "c", "d", "e", "f", "j", "k"],

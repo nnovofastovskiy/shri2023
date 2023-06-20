@@ -1,4 +1,4 @@
-import { States } from "./view";
+import { States } from "./model";
 
 export function clampToLength(state: States, length: number) {
     return state
