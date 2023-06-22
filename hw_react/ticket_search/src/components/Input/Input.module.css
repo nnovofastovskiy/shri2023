@@ -1,0 +1,20 @@
+.wrapper {
+}
+
+.label {
+    margin-bottom: 4px;
+    font-size: 0.875rem;
+    line-height: 20px;
+}
+
+.input {
+    width: 100%;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border-default, #E1E3E6);
+    background: var(--background-primary, #FFF);
+}
+
+.input:focus {
+    outline: auto var(--orange);
+}

@@ -7,3 +7,11 @@
 
     background-color: var(--white);
 }
+
+.title {
+    margin-bottom: 20px;
+}
+
+.item:not(:last-child) {
+    margin-bottom: 16px;
+}

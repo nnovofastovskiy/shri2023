@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang="ru">
       <body className={cn(roboto.className, styles.body)}>
         <Header className={styles.header} />
-        <Sidebar className={styles.sidebar} />
+        <Sidebar id='sidebar-portal' className={styles.sidebar} />
         <main className={styles.main}>
           {children}
         </main>

@@ -16,7 +16,7 @@ export function Header({ className, ...props }: HeaderProps): JSX.Element {
             >
                 Билетопоиск
             </Link>
-            <Cart count={30} />
+            <Cart count={0} />
         </header>
     );
 }

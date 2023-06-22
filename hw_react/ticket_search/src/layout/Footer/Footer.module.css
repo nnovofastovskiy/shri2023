@@ -8,4 +8,9 @@
     padding: 0 32px;
 
     background-color: var(--grey);
+    color: var(--white);
+}
+
+.link:hover {
+    color: var(--white-hover);
 }
