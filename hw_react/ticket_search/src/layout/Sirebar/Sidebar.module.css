@@ -1,4 +1,6 @@
-.main {
+.sidebar {
+    width: 408px;
+
     padding: 24px;
 
     border-radius: var(--border-radius);

@@ -1,0 +1,46 @@
+.body {
+    display: grid;
+
+    min-height: 100vh;
+    grid-template-areas:
+        "header header"
+        "sidebar main"
+        "footer footer";
+    grid-template-columns: auto minmax(320px, 1200px);
+    grid-template-rows: auto 1fr auto;
+    gap: 24px 23px;
+
+    background-color: #F5F5F5;
+}
+
+.wrapper {
+    padding: 0 32px;
+}
+
+.header {
+    grid-area: header;
+}
+
+.sidebar {
+    grid-area: sidebar;
+
+    margin-left: 32px;
+}
+
+.main {
+    grid-area: main;
+
+    margin-right: 32px;
+}
+
+/* .sidebar, .main {
+    padding: 24px;
+
+    border-radius: var(--border-radius);
+
+    background-color: var(--white);
+} */
+
+.footer {
+    grid-area: footer;
+}

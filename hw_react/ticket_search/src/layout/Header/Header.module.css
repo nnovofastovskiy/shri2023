@@ -1,0 +1,22 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+    height: 84px;
+    
+    padding: 0 32px;
+
+    background-color: var(--grey);
+}
+
+.logo {
+    color: var(--white);
+
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.logo:hover {
+    color: var(--white-hover);
+}

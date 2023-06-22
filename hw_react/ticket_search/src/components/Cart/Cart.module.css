@@ -1,0 +1,33 @@
+.link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    color: var(--white);
+}
+
+.icon {
+    fill: var(--white);
+}
+
+.counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 28px;
+    height: 28px;
+
+    border-radius: 8px;
+    background-color: var(--orange);
+
+    font-weight: 700;
+}
+
+.link:hover .counter {
+    background-color: var(--orange-hover);
+}
+
+.link:hover .icon {
+    fill: var(--white-hover);
+}
