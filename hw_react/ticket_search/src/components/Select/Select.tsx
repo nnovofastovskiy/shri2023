@@ -21,9 +21,11 @@ export function Select({ className, label, placeholder, dropItems, ...props }: S
     const [selected, setSelected] = useState<string>();
 
     const selectHandler = useCallback((selected: string) => {
-        console.log('selectHandler');
+        // console.log('selectHandler');
         setSelected(selected);
     }, []);
+
+    const closeHandler = useCallback(() => setIsDropOpen(false), []);
 
     useEffect(() => {
         refPortal.current = document.getElementById("sidebar-portal");
@@ -35,6 +37,10 @@ export function Select({ className, label, placeholder, dropItems, ...props }: S
 
         setMounted(true);
     }, []);
+
+    useEffect(() => {
+        setIsDropOpen(false);
+    }, [selected]);
     return (
         <div
             className={cn(className, styles.wrapper)}
@@ -44,7 +50,8 @@ export function Select({ className, label, placeholder, dropItems, ...props }: S
                 {label}
                 <button
                     className={styles.button}
-                    onClick={() => setIsDropOpen(isDropOpen => !isDropOpen)}
+                    onClick={() => setIsDropOpen(prev => !prev)}
+                // onBlur={() => setIsDropOpen(false)}
                 >
                     {selected ? selected : placeholder}
                     <ArrowIcon className={styles.arrow} />
@@ -56,6 +63,7 @@ export function Select({ className, label, placeholder, dropItems, ...props }: S
                     items={dropItems}
                     top={top}
                     selectHandler={selectHandler}
+                    closeHandler={closeHandler}
                 />,
                 refPortal.current)}
         </div>

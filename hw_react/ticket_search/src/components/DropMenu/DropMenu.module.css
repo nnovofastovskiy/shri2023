@@ -1,30 +1,16 @@
 .wrapper {
+    background-color: var(--white);
+
+    z-index: 2;
 }
 
-.label {
-    margin-bottom: 4px;
-    font-size: 0.875rem;
-    line-height: 20px;
-}
+.bg {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 
-.button {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 16px;
-    border-radius: 8px;
-    border: 1px solid var(--border-default, #E1E3E6);
-    background: var(--background-primary, #FFF);
-    text-align: left;
-    color: #999FA6;
-}
-
-.button:focus {
-    outline: auto var(--orange);
-}
-
-.arrow {
-    width: 18px;
-    height: 18px;
-    fill: #999FA6;
+    /* background-color: rgba(0, 0, 0, 0.7); */
+    z-index: 1;
 }

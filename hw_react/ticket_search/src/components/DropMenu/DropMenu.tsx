@@ -19,19 +19,25 @@ function DropMenuItem({ className, title, selectHandler, ...props }: DropMenuIte
     );
 }
 
-export function DropMenu({ className, items, top, selectHandler, ...props }: DropMenuProps) {
+export function DropMenu({ className, items, top, selectHandler, closeHandler, ...props }: DropMenuProps) {
     return (
-        <ul
-            style={{ top: top }}
-            className={cn(className, styles.wrapper)}
-        >
-            {items.map((item, i) => {
-                return <DropMenuItem
-                    key={`dropItemMenu-${i}`}
-                    title={item}
-                    selectHandler={selectHandler}
-                />;
-            })}
-        </ul>
+        <>
+            <ul
+                style={{ top: top }}
+                className={cn(className, styles.wrapper)}
+            >
+                {items.map((item, i) => {
+                    return <DropMenuItem
+                        key={`dropItemMenu-${i}`}
+                        title={item}
+                        selectHandler={selectHandler}
+                    />;
+                })}
+            </ul>
+            {/* <div className={styles.bg} onClick={(e) => {
+                // e.stopPropagation();
+                closeHandler();
+            }}></div> */}
+        </>
     );
 }
