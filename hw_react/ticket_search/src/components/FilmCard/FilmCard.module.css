@@ -1,0 +1,26 @@
+.link {
+    display: flex;
+    padding: 24px;
+    background-color: var(--white);
+    gap: 24px;
+    border-radius: var(--border-radius);
+}
+
+.img {
+    min-width: 100px;
+    height: 120px;
+    border-radius: var(--border-radius);
+    object-fit: cover;
+}
+
+.title {
+
+}
+
+.genre {
+
+}
+
+.counter {
+    justify-self: flex-end;
+}

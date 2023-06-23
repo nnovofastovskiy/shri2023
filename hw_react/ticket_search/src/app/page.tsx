@@ -1,37 +1,36 @@
+import { FilmCard } from '@/components/FilmCard/FilmCard'
 import styles from './page.module.css'
 
-export default function Home() {
+export interface Film {
+  title: string
+  posterUrl: string
+  releaseYear: number
+  description: string
+  genre: string
+  id: string
+  rating: number
+  director: string
+  reviewIds: string[]
+}
+
+export default async function Home() {
+  const res = await fetch('http://localhost:3001/api/movies');
+  const films: Film[] = await res.json();
+
   return (
     <section className={styles.main}>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex voluptatum quasi excepturi sint reprehenderit placeat eos numquam assumenda repellat! Placeat consectetur libero eaque natus eligendi at ipsa. Illum, eum voluptatum?</p>
+      {films.map(film => (
+        <FilmCard
+          className={styles['film-card']}
+          key={film.id}
+          filId={film.id}
+          title={film.title}
+          genre={film.genre}
+          imgSrc={film.posterUrl}
+          filmHref={`/${film.id}`}
+        />
+      ))}
+      {JSON.stringify(films, null, 2)}
     </section>
   );
 }

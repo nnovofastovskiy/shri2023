@@ -1,8 +1,11 @@
+'use client'
+
 import { SidebarProps } from "./Sidebar.props";
 import cn from 'classnames';
 import styles from './Sidebar.module.css';
 import { Input } from "@/components/Input/Input";
 import { Select } from "@/components/Select/Select";
+import { useEffect, useState } from "react";
 
 const ganres = [
     'Комедии',
@@ -17,7 +20,15 @@ const cinemas = [
 ];
 
 export function Sidebar({ className, ...props }: SidebarProps): JSX.Element {
+    const [selectElements, setSelectElements] = useState<HTMLDivElement[]>();
+    useEffect(() => {
+        console.log(document);
+        // const selects = document.querySelector('.')
+        document.addEventListener('click', (e) => {
+            console.log(e.target)
+        })
 
+    }, []);
     return (
         <aside
             className={cn(className, styles.sidebar)}
