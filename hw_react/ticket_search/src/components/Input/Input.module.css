@@ -13,6 +13,7 @@
     border-radius: 8px;
     border: 1px solid var(--border-default, #E1E3E6);
     background: var(--background-primary, #FFF);
+    line-height: 1rem;
 }
 
 .input:focus {

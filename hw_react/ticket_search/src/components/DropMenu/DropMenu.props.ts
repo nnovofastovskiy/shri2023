@@ -1,5 +1,7 @@
-import { DetailedHTMLProps, HTMLAttributes, ReactElement } from "react";
+import { DetailedHTMLProps, HTMLAttributes } from "react";
 
 export interface DropMenuProps extends DetailedHTMLProps<HTMLAttributes<HTMLUListElement>, HTMLUListElement> {
-    items: string[]
+    items: string[],
+    top: number,
+    selectHandler: (selected: string) => void
 }

@@ -10,8 +10,9 @@
 .button {
     width: 100%;
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    padding: 10px 16px;
+    padding: 9px 16px;
     border-radius: 8px;
     border: 1px solid var(--border-default, #E1E3E6);
     background: var(--background-primary, #FFF);
@@ -28,4 +29,8 @@
     width: 18px;
     height: 18px;
     fill: #999FA6;
+}
+
+.drop-menu {
+    position: absolute;
 }

@@ -8,13 +8,13 @@ const ganres = [
     'Комедии',
     'Ужасы',
     'Мелодрамы'
-]
+];
 
 const cinemas = [
     'IMax',
     'Космик',
     'Каро'
-]
+];
 
 export function Sidebar({ className, ...props }: SidebarProps): JSX.Element {
 
