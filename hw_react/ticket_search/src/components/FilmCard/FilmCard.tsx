@@ -28,8 +28,10 @@ export function FilmCard({
                 // layout="fill"
                 height={120}
             />
-            <h4 className={styles.title}>{title}</h4>
-            <span className={styles.genre}>{genre}</span>
+            <div className={styles.info}>
+                <h4 className={styles.title}>{title}</h4>
+                <span className={styles.genre}>{genre}</span>
+            </div>
             <Counter className={styles.counter} count={0} />
         </Link>
     );
