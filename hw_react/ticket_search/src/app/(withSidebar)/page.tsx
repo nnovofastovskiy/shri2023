@@ -16,6 +16,9 @@ export interface Film {
 export default async function Home() {
   const res = await fetch('http://localhost:3001/api/movies');
   const films: Film[] = await res.json();
+  const genres = Array.from(new Set(films.map(film => film.genre)).values());
+  console.log(genres);
+
 
   return (
     <section className={styles.main}>

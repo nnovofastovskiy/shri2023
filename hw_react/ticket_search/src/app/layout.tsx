@@ -4,12 +4,11 @@ import { Roboto } from 'next/font/google';
 import { Footer } from '@/layout/Footer/Footer';
 import styles from './layout.module.css';
 import cn from 'classnames';
-import { Sidebar } from '@/layout/Sirebar/Sidebar';
 
 const roboto = Roboto({ weight: ["400", "700"], subsets: ['cyrillic'] });
 
 export default function RootLayout({
-  children,
+  children
 }: {
   children: React.ReactNode
 }) {
@@ -17,10 +16,7 @@ export default function RootLayout({
     <html lang="ru">
       <body className={cn(roboto.className, styles.body)}>
         <Header className={styles.header} />
-        <Sidebar id='sidebar-portal' className={styles.sidebar} />
-        <main className={styles.main}>
-          {children}
-        </main>
+        <section className={styles.main}>{children}</section>
         <Footer className={styles.footer} />
       </body>
     </html>
