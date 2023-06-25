@@ -13,12 +13,13 @@ export function FilmCard({
     title,
     genre,
     imgSrc,
-    filmHref
+    filmHref,
+    withRemove = false
 }: FilmCardProps) {
     return (
         <Link
             className={cn(className, styles.link)}
-            href={filmHref}
+            href={`/films/${filmHref}`}
         >
             <Image
                 className={styles.img}
@@ -32,7 +33,7 @@ export function FilmCard({
                 <h4 className={styles.title}>{title}</h4>
                 <span className={styles.genre}>{genre}</span>
             </div>
-            <Counter className={styles.counter} id={filmId} />
+            <Counter className={styles.counter} id={filmId} withRemove={withRemove} />
         </Link>
     );
 }

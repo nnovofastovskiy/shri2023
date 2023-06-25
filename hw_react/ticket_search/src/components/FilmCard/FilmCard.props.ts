@@ -5,5 +5,6 @@ export interface FilmCardProps extends DetailedHTMLProps<HTMLAttributes<HTMLAnch
     title: string,
     genre: string,
     imgSrc: string,
-    filmHref: string
+    filmHref: string,
+    withRemove?: boolean
 }

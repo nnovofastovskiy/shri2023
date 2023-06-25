@@ -35,9 +35,10 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/(woSidebar)/[filmId]",
+    "src/app/(woSidebar)/films/[filmId]",
     "src/redux/features/cart/index.js",
-    "src/redux/features/cart/selector.js"
+    "src/redux/features/cart/selector.js",
+    "src/app/404.js"
   ],
   "exclude": [
     "node_modules"

@@ -1,0 +1,69 @@
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 24px;
+    background-color: var(--white);
+    gap: 24px;
+    border-radius: var(--border-radius);
+}
+
+.img {
+    min-width: 400px;
+    height: 500px;
+    border-radius: var(--border-radius);
+    object-fit: cover;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.title {
+    font-size: 2rem;
+    line-height: 2rem;
+    font-weight: 700;
+}
+
+.counter {
+    /* justify-self: flex-end; */
+}
+.info {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.25rem;
+    gap: 1rem;
+}
+
+
+
+.genre > span,
+.year > span,
+.rating > span,
+.director > span,
+.description-title {
+    font-weight: 700;
+}
+
+.year {
+
+}
+
+.rating {
+
+}
+
+.director {
+
+}
+
+.description-title {
+
+}
+
+.description {
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+

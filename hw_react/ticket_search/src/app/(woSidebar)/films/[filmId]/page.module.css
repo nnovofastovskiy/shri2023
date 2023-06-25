@@ -1,0 +1,9 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    border-radius: var(--border-radius);
+
+    /* background-color: var(--white); */
+}
