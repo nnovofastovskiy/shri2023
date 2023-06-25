@@ -1,0 +1,39 @@
+.button {
+    width: 100%;
+    padding: 24px;
+    border-radius: var(--border-radius);
+    background-color: var(--white);
+    transition: all .3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    box-shadow: 0px 10px 22px -4px rgba(27, 31, 35, 0.12);
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.question {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+}
+
+.arrow {
+    
+}
+
+.open {
+    transform: rotate(180deg);
+}
+
+.answer {
+    margin-top: 1rem;
+    text-align: left;
+    line-height: 1.5rem;
+}

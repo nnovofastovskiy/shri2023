@@ -11,7 +11,7 @@ export function Footer({ className, ...props }: FooterProps): JSX.Element {
         >
             <Link
                 className={styles.link}
-                href={'/questions'}
+                href={'/faq'}
             >
                 Вопросы и ответы
             </Link>
