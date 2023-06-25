@@ -19,9 +19,9 @@ import { genresActions } from '@/redux/features/genres';
 // }
 
 export default async function Home() {
-  const films: Film[] = fetch('http://localhost:3001/api/movies').then(res => res.json())
+  const res = await fetch('http://localhost:3001/api/movies');
 
-  // const films: Film[] = await res.json();
+  const films: Film[] = await res.json();
   const genres = Array.from(new Set(films.map(film => film.genre)).values());
   // console.log(genres);
   // const { data: films, isLoading } = useGetMoviesQuery(null);
