@@ -38,7 +38,8 @@
     "src/app/(woSidebar)/films/[filmId]",
     "src/redux/features/cart/index.js",
     "src/redux/features/cart/selector.js",
-    "src/app/404.js"
+    "src/app/404.js",
+    "src/redux/store.js"
   ],
   "exclude": [
     "node_modules"

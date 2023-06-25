@@ -9,6 +9,9 @@ import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCinema, selectFilterModule, selectGenre } from '@/redux/features/filter/selector'
 import { filterActions } from "@/redux/features/filter";
+import { useGetCinemasQuery } from "@/redux/services/movieApi";
+import { store } from "@/redux/store";
+import { selectMovieApiModule, selectCinemas } from '@/redux/services/selector';
 
 const ganres = [
     'Комедии',
@@ -24,6 +27,11 @@ const cinemas = [
 
 export function Sidebar({ className, ...props }: SidebarProps): JSX.Element {
     // const filter = useSelector((state) => selectGenre(state));
+    // const { data: cinemas } = useGetCinemasQuery(null);
+    // const { data,} = useSelector((state) => selectCinemas(state));
+    // console.log(cinemas);
+
+
     const dispatch = useDispatch();
 
     const setTitle = useCallback((payload: string) => {
