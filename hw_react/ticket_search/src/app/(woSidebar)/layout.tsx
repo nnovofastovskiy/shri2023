@@ -1,5 +1,10 @@
 import styles from './layout.module.css';
 
+export const metadata = {
+  title: 'Билетопоиск',
+  description: 'Покупка билетов в кинотетр'
+}
+
 export default function WoSidebarLayout({
   children
 }: {

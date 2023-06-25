@@ -9,7 +9,7 @@ import { Counter } from "../Counter/Counter";
 
 export function FilmCard({
     className,
-    filId,
+    filmId,
     title,
     genre,
     imgSrc,
@@ -32,7 +32,7 @@ export function FilmCard({
                 <h4 className={styles.title}>{title}</h4>
                 <span className={styles.genre}>{genre}</span>
             </div>
-            <Counter className={styles.counter} count={0} />
+            <Counter className={styles.counter} id={filmId} />
         </Link>
     );
 }

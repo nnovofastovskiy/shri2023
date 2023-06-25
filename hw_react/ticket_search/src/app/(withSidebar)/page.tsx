@@ -26,7 +26,7 @@ export default async function Home() {
         <FilmCard
           className={styles['film-card']}
           key={film.id}
-          filId={film.id}
+          filmId={film.id}
           title={film.title}
           genre={film.genre}
           imgSrc={film.posterUrl}
