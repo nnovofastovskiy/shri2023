@@ -3,6 +3,6 @@ import { DetailedHTMLProps, HTMLAttributes } from "react";
 export interface DropMenuProps extends DetailedHTMLProps<HTMLAttributes<HTMLUListElement>, HTMLUListElement> {
     items: string[],
     top: number,
-    selectHandler: (selected: string) => void,
+    selectHandler: (payload: string) => void,
     closeHandler: () => void
 }

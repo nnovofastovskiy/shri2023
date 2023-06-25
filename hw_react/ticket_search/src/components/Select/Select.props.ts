@@ -5,4 +5,6 @@ export interface SelectProps extends DetailedHTMLProps<HTMLAttributes<HTMLButton
     placeholder?: string,
     dropItems: string[],
     dropHandler?: () => void
+    onChangeHandler: (payload: string) => void,
+    selectHandler: (store: any) => any
 }

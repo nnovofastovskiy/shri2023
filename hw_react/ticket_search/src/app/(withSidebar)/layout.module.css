@@ -10,7 +10,8 @@
     position: sticky;
     top: 108px;
     min-width: 408px;
-    height: calc(100vh - 218px);
+    /* min-height: calc(100vh - 218px); */
+    /* height: 100%; */
 
     margin-left: 32px;
 }

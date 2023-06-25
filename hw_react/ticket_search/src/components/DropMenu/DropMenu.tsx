@@ -8,10 +8,12 @@ interface DropMenuItemProps extends DetailedHTMLProps<HTMLAttributes<HTMLLIEleme
     selectHandler: (selected: string) => void
 }
 
-function DropMenuItem({ className, title, selectHandler, ...props }: DropMenuItemProps) {
+function DropMenuItem({ className, title, selectHandler }: DropMenuItemProps) {
 
     return (
-        <li {...props}>
+        <li
+            className={className}
+        >
             <button onClick={() => selectHandler(title)}>
                 {title}
             </button>
@@ -27,11 +29,14 @@ export function DropMenu({ className, items, top, selectHandler, closeHandler, .
                 className={cn(className, styles.wrapper)}
             >
                 {items.map((item, i) => {
-                    return <DropMenuItem
-                        key={`dropItemMenu-${i}`}
-                        title={item}
-                        selectHandler={selectHandler}
-                    />;
+                    return (
+                        <DropMenuItem
+                            key={`dropItemMenu-${i}`}
+                            className={styles.item}
+                            title={item}
+                            selectHandler={selectHandler}
+                        />
+                    )
                 })}
             </ul>
             {/* <div className={styles.bg} onClick={(e) => {

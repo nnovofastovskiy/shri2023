@@ -7,23 +7,24 @@ import ArrowIcon from './arrow.svg';
 import { DropMenu } from "../DropMenu/DropMenu";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { useSelector } from "react-redux";
 
 
 
-export function Select({ className, label, placeholder, dropItems, ...props }: SelectProps) {
+export function Select({ className, label, placeholder, dropItems, onChangeHandler, selectHandler, ...props }: SelectProps) {
     const refPortal = useRef<Element | null>(null);
     const refSelect = useRef<HTMLDivElement | null>(null);
 
     const [mounted, setMounted] = useState(false);
     const [isDropOpen, setIsDropOpen] = useState(false);
     const [top, setTop] = useState<number>(0);
+    const selected = useSelector(selectHandler);
+    // const [selected, setSelected] = useState<string>();
 
-    const [selected, setSelected] = useState<string>();
-
-    const selectHandler = useCallback((selected: string) => {
-        // console.log('selectHandler');
-        setSelected(selected);
-    }, []);
+    // const selectHandler = useCallback((selected: string) => {
+    //     // console.log('selectHandler');
+    //     setSelected(selected);
+    // }, []);
 
     const closeHandler = useCallback(() => setIsDropOpen(false), []);
 
@@ -32,9 +33,8 @@ export function Select({ className, label, placeholder, dropItems, ...props }: S
         if (refSelect.current) {
             const top = refSelect.current.offsetTop;
             const height = refSelect.current.offsetHeight;
-            setTop(top + height);
+            setTop(top + height + 2);
         }
-
         setMounted(true);
     }, []);
 
@@ -62,7 +62,7 @@ export function Select({ className, label, placeholder, dropItems, ...props }: S
                     className={styles['drop-menu']}
                     items={dropItems}
                     top={top}
-                    selectHandler={selectHandler}
+                    selectHandler={onChangeHandler}
                     closeHandler={closeHandler}
                 />,
                 refPortal.current)}
