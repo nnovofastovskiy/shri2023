@@ -1,7 +1,21 @@
 .main {
-    /* padding: 24px; */
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 
     border-radius: var(--border-radius);
+}
 
-    /* background-color: var(--white); */
+.result {
+    /* position: fixed; */
+    bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    padding: 24px;
+    background-color: var(--white);
+    border-radius: var(--border-radius);
+    font-size: 1.25rem;
+    font-weight: 700;
+    box-shadow: 0px 10px 22px -4px rgba(27, 31, 35, 0.12);
+
 }

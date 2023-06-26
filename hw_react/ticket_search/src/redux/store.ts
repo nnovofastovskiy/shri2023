@@ -2,7 +2,7 @@ import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { cartReducer } from "./features/cart";
 import { genresReducer } from "./features/genres";
 import { filterReducer } from "./features/filter";
-import { filmsReducer } from "./features/films";
+import { filmsReducer } from "./features/films/index";
 import { movieApi } from "./services/movieApi";
 
 export const store = configureStore({
@@ -16,3 +16,5 @@ export const store = configureStore({
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(movieApi.middleware),
     devTools: process.env.NODE_ENV !== 'production'
 })
+
+export type TypeRootState = ReturnType<typeof store.getState>

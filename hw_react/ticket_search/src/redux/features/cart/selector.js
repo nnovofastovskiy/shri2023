@@ -8,7 +8,7 @@ export const selectProductsInCart = (state) => {
     for (const key in allCart) {
         res.push(key);
     }
-    console.log('from selector', res);
+    // console.log('from selector', res);
     return res;
 }
 

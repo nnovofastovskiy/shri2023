@@ -15,18 +15,10 @@ export function Select({ className, label, placeholder, dropItems, onChangeHandl
     const refPortal = useRef<Element | null>(null);
     const refSelect = useRef<HTMLDivElement | null>(null);
 
-    const [mounted, setMounted] = useState(false);
     const [isDropOpen, setIsDropOpen] = useState(false);
     const [top, setTop] = useState<number>(0);
     const selected = useSelector(selectHandler);
-    console.log(selected);
-
-    // const [selected, setSelected] = useState<string>();
-
-    // const selectHandler = useCallback((selected: string) => {
-    //     // console.log('selectHandler');
-    //     setSelected(selected);
-    // }, []);
+    // console.log(selected);
 
     const closeHandler = useCallback(() => setIsDropOpen(false), []);
 
@@ -37,7 +29,6 @@ export function Select({ className, label, placeholder, dropItems, onChangeHandl
             const height = refSelect.current.offsetHeight;
             setTop(top + height + 2);
         }
-        setMounted(true);
     }, []);
 
     useEffect(() => {
@@ -45,7 +36,7 @@ export function Select({ className, label, placeholder, dropItems, onChangeHandl
     }, [selected]);
     return (
         <div
-            className={cn(className, styles.wrapper)}
+            className={cn(className, styles.wrapper, { [styles.selected]: selected })}
             ref={refSelect}
         >
             <label className={styles.label}>
@@ -56,10 +47,10 @@ export function Select({ className, label, placeholder, dropItems, onChangeHandl
                 // onBlur={() => setIsDropOpen(false)}
                 >
                     {selected ? selected.name : placeholder}
-                    <ArrowIcon className={styles.arrow} />
+                    <ArrowIcon className={cn(styles.arrow, { [styles.open]: isDropOpen })} />
                 </button>
             </label>
-            {(mounted && refPortal.current) && isDropOpen && createPortal(
+            {refPortal.current && isDropOpen && createPortal(
                 <DropMenu
                     className={styles['drop-menu']}
                     items={dropItems}

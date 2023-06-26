@@ -15,8 +15,8 @@ import { selectFilteredFilms } from '@/redux/features/films/selector';
 import { filmsActions } from "@/redux/features/films";
 
 export function Sidebar({ className, ...props }: SidebarProps): JSX.Element {
+    const dispatch = useDispatch();
     const { genres } = useSelector((state) => selectGenresModule(state));
-
     const { data: cinemas } = useGetCinemasQuery(null);
     const selectCinemaO = cinemas?.map(c => (
         {
@@ -24,25 +24,22 @@ export function Sidebar({ className, ...props }: SidebarProps): JSX.Element {
             id: c.id
         }));
 
-    const filter = useSelector((state) => selectFilterModule(state));
-    console.log('filter in sidebar', filter);
-
-    const { data: filmsInCinema } = useGetMoviesInCinemaQuery(filter.cinema.id);
-    console.log('filmsInCinema', filmsInCinema);
-    const dispatch = useDispatch();
-    dispatch(filmsActions.setFilteredFilms(filmsInCinema));
+    // const filter = useSelector((state) => selectFilterModule(state));
+    // const { data: filmsInCinema } = useGetMoviesInCinemaQuery(filter.cinema.id);
+    // const dispatch = useDispatch();
+    // dispatch(filmsActions.setFilteredFilms(filmsInCinema));
 
     const setTitle = useCallback((payload: string) => {
         dispatch(filterActions.setTitle(payload));
-    }, [dispatch]);
+    }, []);
 
     const setGenre = useCallback((payload: string) => {
         dispatch(filterActions.setGenre(payload));
-    }, [dispatch]);
+    }, []);
 
     const setCinema = useCallback((payload: string) => {
         dispatch(filterActions.setCinema(payload));
-    }, [dispatch]);
+    }, []);
     return (
         <aside
             className={cn(className, styles.sidebar)}

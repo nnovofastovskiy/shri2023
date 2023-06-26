@@ -2,38 +2,30 @@
 
 import { FilmCard } from '@/components/FilmCard/FilmCard';
 import styles from './page.module.css';
-import { Film, useGetMoviesQuery } from '@/redux/services/movieApi';
+import { Film, useGetMoviesInCinemaQuery, useGetMoviesQuery } from '@/redux/services/movieApi';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { genresActions } from '@/redux/features/genres';
 import { filmsActions } from '@/redux/features/films';
 import { selectAllFilms, selectFilteredFilms } from '@/redux/features/films/selector';
 import { selectFilterModule } from '@/redux/features/filter/selector';
-// export interface Film {
-//   title: string
-//   posterUrl: string
-//   releaseYear: number
-//   description: string
-//   genre: string
-//   id: string
-//   rating: number
-//   director: string
-//   reviewIds: string[]
-// }
+import { TypeRootState } from '@/redux/store';
 
 export default function Home() {
   const { data: films, isLoading } = useGetMoviesQuery(null);
-  const filter = useSelector((state) => selectFilterModule(state));
-  const allFilms = useSelector((state) => selectAllFilms(state));
-  const filteredFilms = useSelector((state) => selectFilteredFilms(state));
+  const allFilms = useSelector((state: TypeRootState) => selectAllFilms(state));
+  const filteredFilms = useSelector((state: TypeRootState) => selectFilteredFilms(state));
   const filmsToPage = filteredFilms ? filteredFilms : allFilms;
   const genres = Array.from(new Set(filmsToPage?.map(film => film.genre)).values()).map(g => ({ text: g }));
-  console.log(genres);
   const dispatch = useDispatch();
+
+  const filter = useSelector((state) => selectFilterModule(state));
+  const { data: filmsInCinema } = useGetMoviesInCinemaQuery(filter.cinema.id);
   useEffect(() => {
+    dispatch(filmsActions.setFilteredFilms(filmsInCinema));
     dispatch(genresActions.set(genres));
     dispatch(filmsActions.setAllFilms(films));
-  }, [filmsToPage, dispatch]);
+  }, [filmsToPage, filmsInCinema, dispatch]);
 
   return (
     <section className={styles.main}>
@@ -51,7 +43,6 @@ export default function Home() {
             filmHref={`/${film.id}`}
           />
         ))}
-      {/* {JSON.stringify(films, null, 2)} */}
     </section>
   );
 }

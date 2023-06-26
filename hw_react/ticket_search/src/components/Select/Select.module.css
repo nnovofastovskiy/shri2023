@@ -1,6 +1,8 @@
 .wrapper {
 }
 
+
+
 .label {
     margin-bottom: 4px;
     font-size: 0.875rem;
@@ -34,3 +36,17 @@
 .drop-menu {
     position: absolute;
 }
+
+.selected .button,
+.button:focus {
+    /* border: 1px solid var(--black); */
+    color: var(--black);
+}
+
+.open{
+    transform: rotate(180deg);
+}
+/* 
+.selected  .arrow {
+    fill: var(--black);
+} */

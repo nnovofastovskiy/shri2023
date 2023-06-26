@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// interface ICart {
+//     cart :{}
+// }
+
 const initialState = {};
 
 const cartSlice = createSlice({

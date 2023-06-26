@@ -1,6 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+export interface Film {
+    title: string
+    posterUrl: string
+    releaseYear: number
+    description: string
+    genre: string
+    id: string
+    rating: number
+    director: string
+    reviewIds: string[]
+}
+
+interface FilmState {
+    allFilms: Film[],
+    filteredFilms: Film[]
+}
+
+const initialState: FilmState = {
     allFilms: [],
     filteredFilms: []
 };
