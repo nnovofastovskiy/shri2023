@@ -18,7 +18,6 @@ export function Select({ className, label, placeholder, dropItems, onChangeHandl
     const [isDropOpen, setIsDropOpen] = useState(false);
     const [top, setTop] = useState<number>(0);
     const selected = useSelector(selectHandler);
-    // console.log(selected);
 
     const closeHandler = useCallback(() => setIsDropOpen(false), []);
 
@@ -36,7 +35,7 @@ export function Select({ className, label, placeholder, dropItems, onChangeHandl
     }, [selected]);
     return (
         <div
-            className={cn(className, styles.wrapper, { [styles.selected]: selected })}
+            className={cn(className, styles.wrapper, { [styles.selected]: selected.name })}
             ref={refSelect}
         >
             <label className={styles.label}>
@@ -46,7 +45,7 @@ export function Select({ className, label, placeholder, dropItems, onChangeHandl
                     onClick={() => setIsDropOpen(prev => !prev)}
                 // onBlur={() => setIsDropOpen(false)}
                 >
-                    {selected ? selected.name : placeholder}
+                    {selected.name ? selected.name : placeholder}
                     <ArrowIcon className={cn(styles.arrow, { [styles.open]: isDropOpen })} />
                 </button>
             </label>

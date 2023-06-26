@@ -13,10 +13,13 @@ import { useGetCinemasQuery, useGetMoviesInCinemaQuery } from "@/redux/services/
 import { selectGenresModule } from '@/redux/features/genres/selector';
 import { selectFilteredFilms } from '@/redux/features/films/selector';
 import { filmsActions } from "@/redux/features/films";
+import { TypeRootState } from "@/redux/store";
 
 export function Sidebar({ className, ...props }: SidebarProps): JSX.Element {
     const dispatch = useDispatch();
-    const { genres } = useSelector((state) => selectGenresModule(state));
+    const { genres } = useSelector((state: TypeRootState) => selectGenresModule(state));
+    console.log(genres);
+
     const { data: cinemas } = useGetCinemasQuery(null);
     const selectCinemaO = cinemas?.map(c => (
         {

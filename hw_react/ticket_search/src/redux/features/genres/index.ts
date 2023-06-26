@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface IGenres {
-    genres: string[]
+    genres: {
+        text: string
+    }[]
 }
 
 const initialState: IGenres = {

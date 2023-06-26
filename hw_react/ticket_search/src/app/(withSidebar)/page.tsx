@@ -19,7 +19,7 @@ export default function Home() {
   const genres = Array.from(new Set(filmsToPage?.map(film => film.genre)).values()).map(g => ({ text: g }));
   const dispatch = useDispatch();
 
-  const filter = useSelector((state) => selectFilterModule(state));
+  const filter = useSelector((state: TypeRootState) => selectFilterModule(state));
   const { data: filmsInCinema } = useGetMoviesInCinemaQuery(filter.cinema.id);
   useEffect(() => {
     dispatch(filmsActions.setFilteredFilms(filmsInCinema));
@@ -32,7 +32,7 @@ export default function Home() {
       {isLoading && <h2>Фильмы загружаюся...</h2>}
       {isError && <h2>Ошибка при загрузке</h2>}
       {filmsToPage && filmsToPage
-        .filter(film => filter.genre ? film.genre === filter.genre.name : true)
+        .filter(film => filter.genre.name ? film.genre === filter.genre.name : true)
         .filter(film => film.title.toLowerCase().includes(filter.title.toLowerCase()))
         .map(film => (
           <FilmCard

@@ -2,14 +2,24 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface IFilter {
     title: string,
-    genre: string,
-    cinema: string
+    genre: {
+        name: string
+    },
+    cinema: {
+        name: string,
+        id: string
+    }
 }
 
 const initialState: IFilter = {
     title: '',
-    genre: '',
-    cinema: '',
+    genre: {
+        name: ""
+    },
+    cinema: {
+        name: "",
+        id: ""
+    },
 };
 
 const filterSlice = createSlice({
