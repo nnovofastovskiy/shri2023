@@ -1,42 +1,68 @@
 import { DropMenuProps } from "./DropMenu.props";
 import cn from 'classnames';
 import styles from './DropMenu.module.css';
-import { DetailedHTMLProps, HTMLAttributes } from "react";
+import { DetailedHTMLProps, HTMLAttributes, useEffect, useRef } from "react";
 
 interface DropMenuItemProps extends DetailedHTMLProps<HTMLAttributes<HTMLLIElement>, HTMLLIElement> {
     title: string,
-    selectHandler: (selected: string) => void
+    id?: string,
+    selectHandler: (payload: any) => void
 }
 
-function DropMenuItem({ className, title, selectHandler }: DropMenuItemProps) {
+function DropMenuItem({ className, title, id, selectHandler }: DropMenuItemProps) {
 
     return (
         <li
             className={className}
         >
-            <button onClick={() => selectHandler(title)}>
+            <button onClick={() => {
+                if (title === 'Не выбрано') return selectHandler('');
+                if (id) return selectHandler({ name: title, id: id });
+                else return selectHandler(title);
+            }}>
                 {title}
             </button>
         </li>
     );
 }
 
-export function DropMenu({ className, items, top, selectHandler, closeHandler, ...props }: DropMenuProps) {
+export function DropMenu({ className, items, top, selectHandler, closeHandler, isOpen, ...props }: DropMenuProps) {
+    const ref = useRef(null);
+    const clickHandle = (e: MouseEvent) => {
+        if (e.target != ref.current) {
+            isOpen && closeHandler();
+        }
+    };
+    useEffect(() => {
+        document.addEventListener('click', clickHandle);
+        return () => {
+            document.removeEventListener('click', clickHandle);
+        };
+    }, [isOpen]);
     return (
         <>
             <ul
+                ref={ref}
                 style={{ top: top }}
                 className={cn(className, styles.wrapper)}
             >
+                <DropMenuItem
+                    key={`dropItemMenu-default`}
+                    className={styles.item}
+                    title={'Не выбрано'}
+                    // id={''}
+                    selectHandler={selectHandler}
+                />
                 {items.map((item, i) => {
                     return (
                         <DropMenuItem
                             key={`dropItemMenu-${i}`}
                             className={styles.item}
-                            title={item}
+                            title={item.text}
+                            id={item.id}
                             selectHandler={selectHandler}
                         />
-                    )
+                    );
                 })}
             </ul>
             {/* <div className={styles.bg} onClick={(e) => {

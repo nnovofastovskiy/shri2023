@@ -19,6 +19,8 @@ export function Select({ className, label, placeholder, dropItems, onChangeHandl
     const [isDropOpen, setIsDropOpen] = useState(false);
     const [top, setTop] = useState<number>(0);
     const selected = useSelector(selectHandler);
+    console.log(selected);
+
     // const [selected, setSelected] = useState<string>();
 
     // const selectHandler = useCallback((selected: string) => {
@@ -53,7 +55,7 @@ export function Select({ className, label, placeholder, dropItems, onChangeHandl
                     onClick={() => setIsDropOpen(prev => !prev)}
                 // onBlur={() => setIsDropOpen(false)}
                 >
-                    {selected ? selected : placeholder}
+                    {selected ? selected.name : placeholder}
                     <ArrowIcon className={styles.arrow} />
                 </button>
             </label>
@@ -64,6 +66,7 @@ export function Select({ className, label, placeholder, dropItems, onChangeHandl
                     top={top}
                     selectHandler={onChangeHandler}
                     closeHandler={closeHandler}
+                    isOpen={isDropOpen}
                 />,
                 refPortal.current)}
         </div>
