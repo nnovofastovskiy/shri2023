@@ -12,7 +12,7 @@ import { selectFilterModule } from '@/redux/features/filter/selector';
 import { TypeRootState } from '@/redux/store';
 
 export default function Home() {
-  const { data: films, isLoading } = useGetMoviesQuery(null);
+  const { data: films, isLoading, isError } = useGetMoviesQuery(null);
   const allFilms = useSelector((state: TypeRootState) => selectAllFilms(state));
   const filteredFilms = useSelector((state: TypeRootState) => selectFilteredFilms(state));
   const filmsToPage = filteredFilms ? filteredFilms : allFilms;
@@ -29,6 +29,8 @@ export default function Home() {
 
   return (
     <section className={styles.main}>
+      {isLoading && <h2>Фильмы загружаюся...</h2>}
+      {isError && <h2>Ошибка при загрузке</h2>}
       {filmsToPage && filmsToPage
         .filter(film => filter.genre ? film.genre === filter.genre.name : true)
         .filter(film => film.title.toLowerCase().includes(filter.title.toLowerCase()))

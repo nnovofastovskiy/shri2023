@@ -1,6 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+interface IFilter {
+    title: string,
+    genre: string,
+    cinema: string
+}
+
+const initialState: IFilter = {
     title: '',
     genre: '',
     cinema: '',

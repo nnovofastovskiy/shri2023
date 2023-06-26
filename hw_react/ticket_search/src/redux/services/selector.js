@@ -1,1 +1,0 @@
-export const selectMovieApiModule = (state) => state.movieApi;

@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+interface IGenres {
+    genres: string[]
+}
+
+const initialState: IGenres = {
     genres: []
 };
 
@@ -9,7 +13,6 @@ const genresSlice = createSlice({
     initialState: initialState,
     reducers: {
         set: (state, { payload }) => {
-            // console.log('genres set', payload);
             state.genres = payload;
         },
     }
