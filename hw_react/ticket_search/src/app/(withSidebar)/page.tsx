@@ -23,10 +23,11 @@ import { selectFilterModule } from '@/redux/features/filter/selector';
 
 export default function Home() {
   const { data: films, isLoading } = useGetMoviesQuery(null);
+  const filter = useSelector((state) => selectFilterModule(state));
   const allFilms = useSelector((state) => selectAllFilms(state));
   const filteredFilms = useSelector((state) => selectFilteredFilms(state));
   const filmsToPage = filteredFilms ? filteredFilms : allFilms;
-  const genres = Array.from(new Set(filmsToPage?.map(film => film.genre)).values());
+  const genres = Array.from(new Set(filmsToPage?.map(film => film.genre)).values()).map(g => ({ text: g }));
   console.log(genres);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -36,17 +37,20 @@ export default function Home() {
 
   return (
     <section className={styles.main}>
-      {filmsToPage && filmsToPage.map(film => (
-        <FilmCard
-          className={styles['film-card']}
-          key={film.id}
-          filmId={film.id}
-          title={film.title}
-          genre={film.genre}
-          imgSrc={film.posterUrl}
-          filmHref={`/${film.id}`}
-        />
-      ))}
+      {filmsToPage && filmsToPage
+        .filter(film => filter.genre ? film.genre === filter.genre.name : true)
+        .filter(film => film.title.toLowerCase().includes(filter.title.toLowerCase()))
+        .map(film => (
+          <FilmCard
+            className={styles['film-card']}
+            key={film.id}
+            filmId={film.id}
+            title={film.title}
+            genre={film.genre}
+            imgSrc={film.posterUrl}
+            filmHref={`/${film.id}`}
+          />
+        ))}
       {/* {JSON.stringify(films, null, 2)} */}
     </section>
   );

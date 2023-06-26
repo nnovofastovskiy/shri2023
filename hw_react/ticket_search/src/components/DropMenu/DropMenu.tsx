@@ -17,8 +17,7 @@ function DropMenuItem({ className, title, id, selectHandler }: DropMenuItemProps
         >
             <button onClick={() => {
                 if (title === 'Не выбрано') return selectHandler('');
-                if (id) return selectHandler({ name: title, id: id });
-                else return selectHandler(title);
+                return selectHandler({ name: title, id: id });
             }}>
                 {title}
             </button>

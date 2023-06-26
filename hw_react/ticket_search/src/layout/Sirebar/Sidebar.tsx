@@ -7,7 +7,7 @@ import { Input } from "@/components/Input/Input";
 import { Select } from "@/components/Select/Select";
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCinema, selectFilterModule, selectGenre } from '@/redux/features/filter/selector';
+import { selectCinema, selectFilterModule, selectGenre, selectTitle } from '@/redux/features/filter/selector';
 import { filterActions } from "@/redux/features/filter";
 import { useGetCinemasQuery, useGetMoviesInCinemaQuery } from "@/redux/services/movieApi";
 import { selectGenresModule } from '@/redux/features/genres/selector';
@@ -54,12 +54,13 @@ export function Sidebar({ className, ...props }: SidebarProps): JSX.Element {
                 label="Название"
                 placeholder="Введите название"
                 onChangeHandler={setTitle}
+                selectHandler={(state) => selectTitle(state)}
             />
             <Select
                 className={styles.item}
                 label="Жанр"
                 placeholder="Выберите жанр"
-                dropItems={genres.map(g => ({ text: g }))}
+                dropItems={genres}
                 onChangeHandler={setGenre}
                 selectHandler={(state) => selectGenre(state)}
             />
