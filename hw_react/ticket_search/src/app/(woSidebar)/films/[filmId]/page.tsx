@@ -25,7 +25,6 @@ export interface Review {
 export default async function Film({ params }: { params: { filmId: string } }) {
   const getFilm = fetch(`http://localhost:3001/api/movie?movieId=${params.filmId}`);
   const getReviews = fetch(`http://localhost:3001/api/reviews?movieId=${params.filmId}`);
-  // Нет обработки ошибок
   const [film, reviews]: [Film, Review[]] = await Promise.all([getFilm, getReviews])
     .then(async ([filmRes, reviewsRes]) => {
       const film = await filmRes.json();
@@ -33,8 +32,6 @@ export default async function Film({ params }: { params: { filmId: string } }) {
       return [film, reviews];
     });
 
-  // console.log(film);
-  // console.log(reviews);
   return (
     <main className={styles.main}>
       <FilmCardBig

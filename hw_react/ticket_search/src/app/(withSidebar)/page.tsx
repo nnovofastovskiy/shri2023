@@ -2,11 +2,11 @@
 
 import { FilmCard } from '@/components/FilmCard/FilmCard';
 import styles from './page.module.css';
-import { Film, useGetMoviesInCinemaQuery, useGetMoviesQuery } from '@/redux/services/movieApi';
+import { useGetMoviesInCinemaQuery, useGetMoviesQuery } from '@/redux/services/movieApi';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { genresActions } from '@/redux/features/genres';
-import { filmsActions } from '@/redux/features/films';
+import { Film, filmsActions } from '@/redux/features/films';
 import { selectAllFilms, selectFilteredFilms } from '@/redux/features/films/selector';
 import { selectFilterModule } from '@/redux/features/filter/selector';
 import { TypeRootState } from '@/redux/store';
@@ -22,9 +22,9 @@ export default function Home() {
   const filter = useSelector((state: TypeRootState) => selectFilterModule(state));
   const { data: filmsInCinema } = useGetMoviesInCinemaQuery(filter.cinema.id);
   useEffect(() => {
-    dispatch(filmsActions.setFilteredFilms(filmsInCinema));
+    if (filmsInCinema) dispatch(filmsActions.setFilteredFilms(filmsInCinema));
+    if (films) dispatch(filmsActions.setAllFilms(films));
     dispatch(genresActions.set(genres));
-    dispatch(filmsActions.setAllFilms(films));
   }, [filmsToPage, filmsInCinema, dispatch]);
 
   return (

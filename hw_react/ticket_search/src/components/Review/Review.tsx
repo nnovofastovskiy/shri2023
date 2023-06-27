@@ -33,7 +33,6 @@ export function Review({
                 </span>
                 <p className={styles.text}>{text}</p>
             </div>
-            {/* <Counter className={styles.counter} id={id} /> */}
         </div>
     );
 }

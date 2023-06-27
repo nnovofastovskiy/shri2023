@@ -49,7 +49,6 @@ export function DropMenu({ className, items, top, selectHandler, closeHandler, i
                     key={`dropItemMenu-default`}
                     className={styles.item}
                     title={'Не выбрано'}
-                    // id={''}
                     selectHandler={selectHandler}
                 />
                 {items.map((item, i) => {
@@ -64,10 +63,6 @@ export function DropMenu({ className, items, top, selectHandler, closeHandler, i
                     );
                 })}
             </ul>
-            {/* <div className={styles.bg} onClick={(e) => {
-                // e.stopPropagation();
-                closeHandler();
-            }}></div> */}
         </>
     );
 }

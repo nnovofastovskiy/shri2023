@@ -5,6 +5,7 @@ import styles from './page.module.css';
 import { selectAllAmount, selectCartModule, selectProductsInCart } from '@/redux/features/cart/selector';
 import { useGetMoviesQuery } from '@/redux/services/movieApi';
 import { FilmCard } from '@/components/FilmCard/FilmCard';
+import { TypeRootState } from '@/redux/store';
 
 function CartResult({ amount }: { amount: number }) {
   return (
@@ -20,10 +21,10 @@ function CartResult({ amount }: { amount: number }) {
 }
 
 export default function CartPage() {
-  const inCart = useSelector((state) => selectProductsInCart(state));
+  const inCart = useSelector((state: TypeRootState) => selectProductsInCart(state));
   const { data, isLoading } = useGetMoviesQuery(null);
   const filmsInCart = data?.filter(film => inCart.includes(film.id));
-  const allCount = useSelector((state) => selectAllAmount(state));
+  const allCount = useSelector((state: TypeRootState) => selectAllAmount(state));
   return (
     <main className={styles.main}>
       {filmsInCart &&

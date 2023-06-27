@@ -8,7 +8,9 @@ export function Input({ className, label, placeholder, onChangeHandler, selectHa
     const value = useSelector(selectHandler);
     const ref = useRef<HTMLInputElement>(null);
     useEffect(() => {
-        ref.current.value = value;
+        if (ref.current) {
+            ref.current.value = value;
+        }
     }, []);
     return (
         <div className={cn(className, styles.wrapper)} {...props}>
