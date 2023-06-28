@@ -6,7 +6,7 @@ import { useGetMoviesInCinemaQuery, useGetMoviesQuery } from '@/redux/services/m
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { genresActions } from '@/redux/features/genres';
-import { Film, filmsActions } from '@/redux/features/films';
+import { filmsActions } from '@/redux/features/films';
 import { selectAllFilms, selectFilteredFilms } from '@/redux/features/films/selector';
 import { selectFilterModule } from '@/redux/features/filter/selector';
 import { TypeRootState } from '@/redux/store';
