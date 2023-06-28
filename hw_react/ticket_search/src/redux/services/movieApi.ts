@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
 export interface Film {
     title: string
     posterUrl: string
@@ -21,9 +22,9 @@ export const movieApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3001/api/' }),
     endpoints: (builder) => ({
         getMovies: builder.query<Film[], null>({ query: () => 'movies' }),
-        getMovie: builder.query({ query: (movieId) => `movie?movieId=${movieId}` }),
+        getMovie: builder.query<Film, string>({ query: (movieId) => `movie?movieId=${movieId}` }),
         getCinemas: builder.query<Cinema[], null>({ query: () => 'cinemas' }),
-        getMoviesInCinema: builder.query({ query: (cinemaId) => `movies?cinemaId=${cinemaId}` }),
+        getMoviesInCinema: builder.query<Film[], string>({ query: (cinemaId) => `movies?cinemaId=${cinemaId}` }),
     })
 });
 

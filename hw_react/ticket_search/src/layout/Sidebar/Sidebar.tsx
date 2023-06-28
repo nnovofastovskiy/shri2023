@@ -1,38 +1,36 @@
-'use client'
+'use client';
 
 import { SidebarProps } from "./Sidebar.props";
 import cn from 'classnames';
 import styles from './Sidebar.module.css';
 import { Input } from "@/components/Input/Input";
 import { Select } from "@/components/Select/Select";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCinema, selectFilterModule, selectGenre } from '@/redux/features/filter/selector'
+import { selectCinema, selectFilterModule, selectGenre, selectTitle } from '@/redux/features/filter/selector';
 import { filterActions } from "@/redux/features/filter";
-import { useGetCinemasQuery } from "@/redux/services/movieApi";
-import { store } from "@/redux/store";
-import { selectMovieApiModule, selectCinemas } from '@/redux/services/selector';
-
-const ganres = [
-    'Комедии',
-    'Ужасы',
-    'Мелодрамы'
-];
-
-const cinemas = [
-    'IMax',
-    'Космик',
-    'Каро'
-];
+import { useGetCinemasQuery, useGetMoviesInCinemaQuery } from "@/redux/services/movieApi";
+import { selectGenresModule } from '@/redux/features/genres/selector';
+import { selectFilteredFilms } from '@/redux/features/films/selector';
+import { filmsActions } from "@/redux/features/films";
+import { TypeRootState } from "@/redux/store";
 
 export function Sidebar({ className, ...props }: SidebarProps): JSX.Element {
-    // const filter = useSelector((state) => selectGenre(state));
-    // const { data: cinemas } = useGetCinemasQuery(null);
-    // const { data,} = useSelector((state) => selectCinemas(state));
-    // console.log(cinemas);
-
-
     const dispatch = useDispatch();
+    const { genres } = useSelector((state: TypeRootState) => selectGenresModule(state));
+    console.log(genres);
+
+    const { data: cinemas } = useGetCinemasQuery(null);
+    const selectCinemaO = cinemas?.map(c => (
+        {
+            text: c.name,
+            id: c.id
+        }));
+
+    // const filter = useSelector((state) => selectFilterModule(state));
+    // const { data: filmsInCinema } = useGetMoviesInCinemaQuery(filter.cinema.id);
+    // const dispatch = useDispatch();
+    // dispatch(filmsActions.setFilteredFilms(filmsInCinema));
 
     const setTitle = useCallback((payload: string) => {
         dispatch(filterActions.setTitle(payload));
@@ -45,14 +43,6 @@ export function Sidebar({ className, ...props }: SidebarProps): JSX.Element {
     const setCinema = useCallback((payload: string) => {
         dispatch(filterActions.setCinema(payload));
     }, []);
-
-    // const [selectElements, setSelectElements] = useState<HTMLDivElement[]>();
-    // useEffect(() => {
-    //     document.addEventListener('click', (e) => {
-    //         console.log(e.target)
-    //     })
-
-    // }, []);
     return (
         <aside
             className={cn(className, styles.sidebar)}
@@ -64,12 +54,13 @@ export function Sidebar({ className, ...props }: SidebarProps): JSX.Element {
                 label="Название"
                 placeholder="Введите название"
                 onChangeHandler={setTitle}
+                selectHandler={(state) => selectTitle(state)}
             />
             <Select
                 className={styles.item}
                 label="Жанр"
                 placeholder="Выберите жанр"
-                dropItems={ganres}
+                dropItems={genres}
                 onChangeHandler={setGenre}
                 selectHandler={(state) => selectGenre(state)}
             />
@@ -77,7 +68,7 @@ export function Sidebar({ className, ...props }: SidebarProps): JSX.Element {
                 className={styles.item}
                 label="Кинотеатр"
                 placeholder="Выберите кинотеатр"
-                dropItems={cinemas}
+                dropItems={selectCinemaO || []}
                 onChangeHandler={setCinema}
                 selectHandler={(state) => selectCinema(state)}
             />

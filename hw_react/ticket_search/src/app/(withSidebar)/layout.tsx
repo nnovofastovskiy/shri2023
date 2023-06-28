@@ -1,5 +1,5 @@
 import styles from './layout.module.css';
-import { Sidebar } from '@/layout/Sirebar/Sidebar';
+import { Sidebar } from '@/layout/Sidebar/Sidebar';
 
 export default function WithSidebarLayout({
   children
