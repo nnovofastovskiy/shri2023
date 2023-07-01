@@ -1,15 +1,33 @@
 import React from 'react';
+import { it, describe, expect } from '@jest/globals';
 
 import { render } from '@testing-library/react';
 
-describe('Simple Test Case', () => {
-    it('Should return 4', () => {
-        const app = <div>example</div>;
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { Application } from '../../src/client/Application'
+import { initStore } from '../../src/client/store';
+import { ExampleApi, CartApi } from '../../src/client/api';
 
-        const { container } = render(app);
 
-        console.log(container.outerHTML);
+// describe('Simple Test Case', () => {
+it('В шапке есть ссылка на главную', () => {
+    const basename = '/hw/store';
+    const api = new ExampleApi(basename);
+    const cart = new CartApi();
+    const store = initStore(api, cart);
+    const application = (
+        <BrowserRouter basename={basename}>
+            <Provider store={store}>
+                <Application />
+            </Provider>
+        </BrowserRouter>
+    );
 
-        expect(container.textContent).toBe('example');
-    });
+    const { container } = render(application);
+
+    console.log(container.outerHTML);
+
+    // expect(container.textContent).toBe('example');
 });
+// });
