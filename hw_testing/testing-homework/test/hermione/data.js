@@ -3,7 +3,7 @@ const data = {
     pages: {
         home: 'http://localhost:3000/hw/store/',
         catalog: 'http://localhost:3000/hw/store/catalog',
-        delivery: 'http://localhost:3000/hw/store/catalog',
+        delivery: 'http://localhost:3000/hw/store/delivery',
         contacts: 'http://localhost:3000/hw/store/contacts',
         cart: 'http://localhost:3000/hw/store/cart',
     },
