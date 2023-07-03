@@ -20,20 +20,29 @@ const arr = fileContent.toString().trim().split('\n')[1].split(' ').map(n => par
 
 function solution(arr) {
     // console.log(arr);
-    const set = Array.from(new Set(arr)); // length <= 120
+    const map = new Map();
+    for (let i = 0; i < arr.length; i++) {
+        map.set(arr[i], map.get(arr[i]) + 1 || 1);
+    }
+    console.log(map);
+    const keys = Array.from(map.keys());
+    console.log(keys);
     let res = 0;
-    for (let i = 0; i < set.length; i++) {
-        const x = set[i];
-        let f = false;
+    for (let i = 0; i < keys.length; i++) {
+        // console.log(keys[i]);
+        const x = keys[i];
+        // let f = false;
         for (let j = 0; j < arr.length; j++) {
             if (arr[j] <= x / 2 + 7) { }
             else if (arr[j] > x) { }
             else if (arr[j] > 100 && x < 100) { }
-            else res++;
-            if (x <= arr[j] / 2 + 7) { }
-            else if (x > arr[j]) { }
-            else if (x > 100 && arr[j] < 100) { }
-            else res++;
+            else {
+                res += map.get(keys[i]) - 1;
+            }
+            // if (x <= arr[j] / 2 + 7) { }
+            // else if (x > arr[j]) { }
+            // else if (x > 100 && arr[j] < 100) { }
+            // else res++;
         }
     }
     return res;
