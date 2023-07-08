@@ -36,7 +36,7 @@ const config: webpack.Configuration = {
         rules: [
             {
                 test: /\.(tsx|ts)/i,
-                use: ['ts-loader', 'i18n-loader'],
+                use: ['ts-loader'],
                 exclude: /node_modules/,
             },
             // @todo настроить загрузчик
