@@ -3,15 +3,16 @@ import * as webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import StatoscopePlugin from '@statoscope/webpack-plugin';
 import fs from 'fs';
+var glob = require("glob");
 
-// @todo загрузить переводы из файла
-// const translates = require('./i18n.json');
-// console.log('translates', translates);
+const translates = JSON.parse(fs.readFileSync('./i18n.json', 'utf-8'));
+// console.log('===================', translates);
 
 
 const config: webpack.Configuration = {
     mode: 'production',
-    entry: ['./src/pages/root.tsx', './src/pages/root2.tsx'],
+    // entry: ['./src/pages/root.tsx', './src/pages/root2.tsx'],
+    entry: glob.sync("./src/pages/*.tsx"),
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].[contenthash].js',
@@ -36,7 +37,7 @@ const config: webpack.Configuration = {
         rules: [
             {
                 test: /\.(tsx|ts)/i,
-                use: ['ts-loader'],
+                use: [{ loader: 'ts-loader' }, { loader: 'i18n-loader', options: { translates } },],
                 exclude: /node_modules/,
             },
             // @todo настроить загрузчик
