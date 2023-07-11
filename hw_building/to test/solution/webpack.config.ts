@@ -6,35 +6,13 @@ import fs from 'fs';
 var glob = require("glob");
 
 const translates = JSON.parse(fs.readFileSync('./i18n.json', 'utf-8'));
-<<<<<<< HEAD
-const r = /[\w\. ]+(?=[\.])/;
-interface Obj {
-    [key: string]: string;
-}
-const entry: Obj = glob.sync("./src/pages/*.tsx").reduce((acc: Obj, item: string) => {
-    const name = item.match(r)?.[0];
-    if (name)
-        acc[name] = item;
-    return acc
-}, {});
-=======
 // console.log('===================', translates);
->>>>>>> f45b8aa64936e4de02f968df094937f465c0e081
 
 
 const config: webpack.Configuration = {
     mode: 'production',
     // entry: ['./src/pages/root.tsx', './src/pages/root2.tsx'],
-<<<<<<< HEAD
-    // entry: glob.sync("./src/pages/*.tsx"),
-    // entry: {
-    //     root: './src/pages/root.tsx',
-    //     root2: './src/pages/root2.tsx',
-    // },
-    entry: entry,
-=======
     entry: glob.sync("./src/pages/*.tsx"),
->>>>>>> f45b8aa64936e4de02f968df094937f465c0e081
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].[contenthash].js',
