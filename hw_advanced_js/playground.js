@@ -1,42 +1,64 @@
 module.exports = Sequence;
-
+let fromS = Symbol.for("from");
+let toS = Symbol.for("to");
+let stepS = Symbol.for("step");
+let currentS = Symbol.for("current");
 function Sequence(from, to, step) {
     if (!(this instanceof Sequence)) {
         return new Sequence(from, to, step);
     }
-    this.from = from;
-    this.to = to
-    this.step = step
-    this.current = this.from
+    this[fromS] = from;
+    this[toS] = to;
+    this[stepS] = step;
+    this[currentS] = this[fromS];
+
+    this[Symbol.toStringTag] = 'SequenceOfNumbers';
+
+    this[Symbol.toPrimitive] = function (hint) {
+        switch (hint) {
+            case 'string':
+                return `Sequence of numbers from ${this[fromS]} to ${this[toS]} with step ${this[stepS]}`;
+            case 'number':
+                return Array.from(this).length;
+            default:
+                return this
+        }
+
+    };
 }
 
 Sequence.prototype[Symbol.iterator] = function () {
-    let current = this.from;
-
-    return {
-        next: () => {
-            if (current <= this.to) {
-                const value = current;
-                current = (this.to > this.from) ? current + this.step : current - this.step;
-                return { value, done: false }
+    let current = this[fromS];
+    if (this[fromS] < this[toS])
+        return {
+            next: () => {
+                if (current <= this[toS]) {
+                    const value = current;
+                    this[currentS] = current;
+                    current += this[stepS];
+                    return { value, done: false }
+                }
+                return { done: true }
             }
-            return { done: true }
         }
-    }
+    else
+        return {
+            next: () => {
+                if (current >= this[toS]) {
+                    const value = current;
+                    this[currentS] = current;
+                    current -= this[stepS];
+                    return { value, done: false }
+                }
+                return { done: true }
+            }
+        }
 }
 
-Sequence.prototype[Symbol.toStringTag] = 'SequenceOfNumbers';
-
-Sequence.prototype.toString = function () {
-    return `Sequence of numbers from ${this.from} to ${this.to} with step ${this.step}`
-}
-
-Sequence.prototype.valueOf = function () {
-    return Array.from(this).length;
-}
 
 Sequence.prototype.setStep = function (step) {
-    return new Sequence(this.current, this.to, step);
+    this[fromS] = this[currentS];
+    this[stepS] = step;
 }
 
 
@@ -50,11 +72,14 @@ let result = null;
 
 // Преобразования к примитивам
 sequence = Sequence(0, 10, 1);
+console.log(sequence);
 console.log(1);
 console.assert(Object.prototype.toString.call(sequence) === '[object SequenceOfNumbers]');
 console.log(2);
+console.log(String(sequence));
 console.assert(String(sequence) === 'Sequence of numbers from 0 to 10 with step 1');
 console.log(3);
+console.log(Number(sequence));
 console.assert(Number(sequence) === 11);
 
 
@@ -68,7 +93,7 @@ for (const item of sequence) {
 }
 
 console.log(5);
-console.log(result);
+// console.log(result);
 console.assert(String([5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5]) === String(result));
 
 
@@ -78,7 +103,6 @@ console.assert(String([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]) === String([...Sequenc
 
 
 // Работает метод setStep
-console.log(7);
 sequence = Sequence(0, 10, 2);
 iterator = sequence[Symbol.iterator]();
 
@@ -86,15 +110,21 @@ iterator.next();
 iterator.next();
 sequence.setStep(4);
 
+console.log(7);
 console.assert(Number(sequence) === 3);
+console.log(8);
 console.assert(String(sequence) === 'Sequence of numbers from 2 to 10 with step 4');
+console.log(9);
 console.assert(String([...sequence]) === String([2, 6, 10]));
 
 
 // Скрыты лишние свойства и методы
 sequence = Sequence(0, 10, 1);
 
+console.log(10);
 console.assert(String(Object.getOwnPropertyNames(sequence)) === String([]));
+console.log(11);
+console.log(String(Object.getOwnPropertyNames(Sequence.prototype).sort()));
 console.assert(String(Object.getOwnPropertyNames(Sequence.prototype).sort()) === String(['constructor', 'setStep']));
 
 
