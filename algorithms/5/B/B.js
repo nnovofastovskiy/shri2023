@@ -9,12 +9,11 @@ const str = fileContent.toString().split('\n')[1].trim();
 function solution(k, str) {
     console.log(k);
     console.log(str);
-    let l = 0;
-    let r = 0;
     let max = 0;
     let map = new Map();
-    while (r < str.length) {
-
+    for (let i = 0; i < str.length; i++) {
+        map.set(str[i], map.get(str[i]) ? map.get(str[i]) + 1 : 1);
+        console.log(map);
     }
     return 0
 }
